@@ -9,7 +9,7 @@ import Generated.Gql.Directives.Admin (Directives, cached)
 import Generated.Gql.Schema.Admin (Query)
 import GraphQL.Client.Args ((=>>))
 import GraphQL.Client.Operation (OpQuery)
-import GraphQL.Client.Query (query_)
+import GraphQL.Client.BaseClients.Affjax.Node (query_)
 import GraphQL.Client.Types (class GqlQuery)
 import Type.Proxy (Proxy(..))
 
@@ -18,7 +18,7 @@ main =
   launchAff_ do
     { widgets } <-
       queryGql "widgets_cached"
-        $ cached { ttl: 10, refresh: false }
+        $ cached { refresh: false }
             { widgets: { id: 1 } =>> { name: unit }
             }
     logShow $ map _.name widgets
